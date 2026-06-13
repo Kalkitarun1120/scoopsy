@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { API_URL } from '../config';
 
 const AppContext = createContext();
 
@@ -69,7 +70,7 @@ export const AppProvider = ({ children }) => {
 
   const fetchCart = async () => {
     try {
-      const { data } = await axios.get('/api/cart');
+      const { data } = await axios.get(`${API_URL}/api/cart`);
 
       const formattedCart = data.map(item => ({
         ...item.product,
@@ -89,7 +90,7 @@ export const AppProvider = ({ children }) => {
     }
 
     try {
-      const { data } = await axios.post('/api/cart/add', {
+      const { data } = await axios.post(`${API_URL}/api/cart/add`, {
         productId: product._id,
         quantity
       });
@@ -131,7 +132,7 @@ export const AppProvider = ({ children }) => {
     }
 
     try {
-      const { data } = await axios.put('/api/cart/update', {
+      const { data } = await axios.put(`${API_URL}/api/cart/update`, {
         productId: id,
         quantity
       });
@@ -149,7 +150,7 @@ export const AppProvider = ({ children }) => {
 
   const clearCart = async () => {
     try {
-      await axios.delete('/api/cart/clear');
+      await axios.delete(`${API_URL}/api/cart/clear`);
       setCart([]);
     } catch (err) {
       toast.error('Failed to clear cart');
@@ -204,8 +205,7 @@ export const AppProvider = ({ children }) => {
     }
 
     try {
-      const { data } = await axios.post(
-        `/api/auth/wishlist/${productId}`
+      const { data } = await axios.post(`${API_URL}/api/auth/wishlist/${productId}`
       );
 
       setWishlist(data.wishlist);
