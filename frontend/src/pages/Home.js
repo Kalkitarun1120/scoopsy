@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../config';
 import ProductCard from '../components/ProductCard';
 import './Home.css';
 
@@ -27,7 +28,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('/api/products?featured=true&limit=8')
+    axios.get(`${API_URL}/api/products?featured=true&limit=8`)
       .then(({ data }) => setFeatured(data.products))
       .catch(console.error)
       .finally(() => setLoading(false));

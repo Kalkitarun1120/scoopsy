@@ -111,7 +111,7 @@ export const AppProvider = ({ children }) => {
   const removeFromCart = async (id) => {
     try {
       const { data } = await axios.delete(
-        `/api/cart/remove/${id}`
+      `${API_URL}/api/cart/remove/${id}`
       );
 
       const formattedCart = data.map(item => ({

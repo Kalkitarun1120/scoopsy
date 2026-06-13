@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../config';
 import toast from 'react-hot-toast';
 import './Admin.css';
 
@@ -25,7 +26,7 @@ const Admin = () => {
 
   const fetchProducts = async () => {
     setLoading(true);
-    const { data } = await axios.get('/api/products?limit=100');
+    const { data } = await axios.get(`${API_URL}/api/products?limit=100`);
     setProducts(data.products);
     setLoading(false);
   };
@@ -33,7 +34,7 @@ const Admin = () => {
   const fetchOrders = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get('/api/orders/admin/all');
+      const { data } = await axios.get(`${API_URL}/api/orders/admin/all`);
       setOrders(data);
     } catch (e) { toast.error('Failed to load orders'); }
     setLoading(false);
@@ -54,10 +55,10 @@ const Admin = () => {
     try {
       const payload = { ...form, price: Number(form.price), originalPrice: form.originalPrice ? Number(form.originalPrice) : undefined, stock: Number(form.stock) };
       if (editProduct) {
-        await axios.put(`/api/products/${editProduct._id}`, payload);
+        await axios.put(`${API_URL}/api/products/${editProduct._id}`, payload);
         toast.success('Product updated! ✅');
       } else {
-        await axios.post('/api/products', payload);
+        await axios.put(`${API_URL}/api/products/${editProduct._id}`, payload);
         toast.success('Product added! 🎀');
       }
       resetForm();
@@ -73,13 +74,13 @@ const Admin = () => {
 
   const handleDelete = async id => {
     if (!window.confirm('Delete this product?')) return;
-    await axios.delete(`/api/products/${id}`);
+    await axios.delete(`${API_URL}/api/products/${id}`);
     toast.success('Deleted!');
     fetchProducts();
   };
 
   const handleStatusUpdate = async (orderId, status) => {
-    await axios.put(`/api/orders/${orderId}/status`, { status });
+    await axios.put(`${API_URL}/api/orders/${orderId}/status`, { status });
     toast.success('Status updated!');
     fetchOrders();
   };

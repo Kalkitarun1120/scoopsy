@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../config';
 import toast from 'react-hot-toast';
 import { useApp } from '../context/AppContext';
 import './Auth.css';
@@ -16,7 +17,7 @@ export const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.post('/api/auth/login', form);
+      const { data } = await axios.post(`${API_URL}/api/auth/login`, form);
       login(data.user, data.token);
       toast.success(`Welcome back, ${data.user.name}! 💕`);
       navigate('/');
@@ -64,7 +65,7 @@ export const Register = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.post('/api/auth/register', form);
+      const { data } = await axios.post(`${API_URL}/api/auth/login`, form);
       login(data.user, data.token);
       toast.success(`Welcome to Scoopsy, ${data.user.name}! 🎀`);
       navigate('/');

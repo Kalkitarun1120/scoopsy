@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../config';
 import './Orders.css';
 
 const STATUS_COLORS = {
@@ -24,7 +25,7 @@ const Orders = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('/api/orders/my')
+    axios.get(`${API_URL}/api/orders/my`)
       .then(({ data }) => setOrders(data))
       .catch(console.error)
       .finally(() => setLoading(false));

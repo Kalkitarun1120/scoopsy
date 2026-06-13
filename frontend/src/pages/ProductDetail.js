@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../config';
 import { useApp } from '../context/AppContext';
 import './ProductDetail.css';
 
@@ -13,7 +14,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`/api/products/${id}`)
+    axios.get(`${API_URL}/api/products/${id}`)
       .then(({ data }) => setProduct(data))
       .catch(console.error)
       .finally(() => setLoading(false));

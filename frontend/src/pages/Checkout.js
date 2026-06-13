@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../config';
 import toast from 'react-hot-toast';
 import { useApp } from '../context/AppContext';
 import './Checkout.css';
@@ -37,7 +38,7 @@ const Checkout = () => {
         totalAmount: total,
         paymentMethod: form.paymentMethod
       };
-      const { data } = await axios.post('/api/orders', orderData);
+      const { data } = await axios.post(`${API_URL}/api/orders`, orderData);
        await clearCart();
       toast.success('Order placed successfully! 🎀');
       navigate(`/order-success/${data._id}`);

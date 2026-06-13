@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useApp } from '../context/AppContext';
 import axios from 'axios';
+import { API_URL } from '../config';
 import toast from 'react-hot-toast';
 import './Profile.css';
 import { useNavigate } from 'react-router-dom';
@@ -24,7 +25,7 @@ const Profile = () => {
 
   const loadProfile = async () => {
     try {
-      const { data } = await axios.get('/api/auth/profile');
+      const { data } = await axios.get(`${API_URL}/api/auth/profile`);
 
       setForm({
         name: data.name || '',
@@ -50,7 +51,7 @@ const Profile = () => {
   setSaving(true);
 
   try {
-    const { data } = await axios.put('/api/auth/profile', {
+    const { data } = await axios.put(`${API_URL}/api/auth/profile`, {
       name: form.name,
       phone: form.phone,
       address: form.address

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../config';
 import ProductCard from '../components/ProductCard';
 import './Products.css';
 
@@ -53,7 +54,7 @@ useEffect(() => {
   if (featured) query.set('featured', 'true');
   query.set('limit', '24');
 
-  axios.get(`/api/products?${query}`)
+  axios.get(`${API_URL}/api/products?${query}`)
   .then(({ data }) => {
     setTimeout(() => {
       setProducts(data.products);
