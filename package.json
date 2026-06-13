@@ -1,0 +1,12 @@
+
+{
+  "name": "scoopsy",
+  "version": "1.0.0",
+  "description": "Scoopsy - Cute Mini Korean Gifts MERN Stack App",
+  "scripts": {
+    "dev": "npx concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\"",
+    "seed": "cd backend && npm run seed",
+    "start-backend": "cd backend && npm start",
+    "start-frontend": "cd frontend && npm start"
+  }
+}
